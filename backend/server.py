@@ -119,6 +119,65 @@ async def get_status_checks():
     
     return status_checks
 
+# Shipment Routes
+@api_router.get("/shipments", response_model=List[Shipment])
+async def get_shipments():
+    """Tüm sevkiyatları getir"""
+    shipments = await db.shipments.find({}, {"_id": 0}).to_list(10000)
+    
+    for shipment in shipments:
+        if isinstance(shipment.get('created_at'), str):
+            shipment['created_at'] = datetime.fromisoformat(shipment['created_at'])
+    
+    return shipments
+
+@api_router.post("/shipments", response_model=Shipment)
+async def create_shipment(input: ShipmentCreate):
+    """Yeni sevkiyat kaydı oluştur"""
+    shipment_dict = input.model_dump()
+    shipment_obj = Shipment(**shipment_dict)
+    
+    # Convert to dict and serialize datetime
+    doc = shipment_obj.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    
+    await db.shipments.insert_one(doc)
+    return shipment_obj
+
+@api_router.put("/shipments/{shipment_id}", response_model=Shipment)
+async def update_shipment(shipment_id: str, input: ShipmentUpdate):
+    """Sevkiyat kaydını güncelle"""
+    # Get existing shipment
+    existing = await db.shipments.find_one({"id": shipment_id}, {"_id": 0})
+    if not existing:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail="Sevkiyat bulunamadı")
+    
+    # Update only provided fields
+    update_data = {k: v for k, v in input.model_dump().items() if v is not None}
+    
+    if update_data:
+        await db.shipments.update_one({"id": shipment_id}, {"$set": update_data})
+    
+    # Get updated shipment
+    updated = await db.shipments.find_one({"id": shipment_id}, {"_id": 0})
+    
+    if isinstance(updated.get('created_at'), str):
+        updated['created_at'] = datetime.fromisoformat(updated['created_at'])
+    
+    return Shipment(**updated)
+
+@api_router.delete("/shipments/{shipment_id}")
+async def delete_shipment(shipment_id: str):
+    """Sevkiyat kaydını sil"""
+    result = await db.shipments.delete_one({"id": shipment_id})
+    
+    if result.deleted_count == 0:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail="Sevkiyat bulunamadı")
+    
+    return {"message": "Sevkiyat başarıyla silindi", "id": shipment_id}
+
 # Include the router in the main app
 app.include_router(api_router)
 
