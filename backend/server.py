@@ -37,6 +37,59 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Shipment Models
+class Shipment(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    date: str  # Sevkiyat Tarihi
+    customer: str  # Müşteri Adı
+    product_type: str  # Ürün Tipi (Normal Ürün (Metre) vs.)
+    color: str  # RENK - YENİ ALAN!
+    thickness: str  # Kalınlık (mm)
+    width: str  # En (cm)
+    length: str  # Metre (m)
+    quantity: int  # Adet
+    square_meter: float  # Metrekare (m²)
+    waybill_no: str = ""  # İrsaliye No
+    plate: str = ""  # Plaka
+    driver: str = ""  # Sürücü
+    description: str = ""  # Ürün Açıklaması
+    notes: str = ""  # Notlar
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ShipmentCreate(BaseModel):
+    date: str
+    customer: str
+    product_type: str
+    color: str  # RENK - YENİ ALAN!
+    thickness: str
+    width: str
+    length: str
+    quantity: int
+    square_meter: float
+    waybill_no: str = ""
+    plate: str = ""
+    driver: str = ""
+    description: str = ""
+    notes: str = ""
+
+class ShipmentUpdate(BaseModel):
+    date: str = None
+    customer: str = None
+    product_type: str = None
+    color: str = None  # RENK - YENİ ALAN!
+    thickness: str = None
+    width: str = None
+    length: str = None
+    quantity: int = None
+    square_meter: float = None
+    waybill_no: str = None
+    plate: str = None
+    driver: str = None
+    description: str = None
+    notes: str = None
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
