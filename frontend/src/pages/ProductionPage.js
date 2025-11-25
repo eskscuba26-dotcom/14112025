@@ -174,7 +174,12 @@ export default function ProductionPage() {
 
   const filteredProductions = productions.filter((item) => {
     const search = searchTerm.toLowerCase();
-    return (\n      item.makine?.toLowerCase().includes(search) ||\n      item.model?.toLowerCase().includes(search) ||\n      item.renk?.toLowerCase().includes(search)\n    );\n  });
+    return (
+      item.makine?.toLowerCase().includes(search) ||
+      item.model?.toLowerCase().includes(search) ||
+      item.renk?.toLowerCase().includes(search)
+    );
+  });
 
   const totalAdet = filteredProductions.reduce((sum, item) => sum + item.adet, 0);
   const totalMetrekare = filteredProductions.reduce((sum, item) => sum + item.metrekare, 0);
