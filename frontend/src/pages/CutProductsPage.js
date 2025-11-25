@@ -406,7 +406,13 @@ export default function CutProductsPage() {
                     <TableCell>{item.tarih}</TableCell>
                     <TableCell>
                       <span
-                        className={`px-2 py-1 rounded text-xs font-medium ${\n                          item.durum === 'Onaylı'\n                            ? 'bg-green-100 text-green-800'\n                            : item.durum === 'Beklemede'\n                            ? 'bg-yellow-100 text-yellow-800'\n                            : 'bg-red-100 text-red-800'\n                        }`}
+                        className={`px-2 py-1 rounded text-xs font-medium ${
+                          item.durum === 'Onaylı'
+                            ? 'bg-green-100 text-green-800'
+                            : item.durum === 'Beklemede'
+                            ? 'bg-yellow-100 text-yellow-800'
+                            : 'bg-red-100 text-red-800'
+                        }`}
                       >
                         {item.durum}
                       </span>
