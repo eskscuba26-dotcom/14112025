@@ -337,70 +337,23 @@ function Dashboard() {
   );
 }
 
-// Placeholder for other pages - will be implemented in next part
-function ProductionPage() {
-  return <div className="text-center py-10">Üretim Girişi - Yükleniyor...</div>;
-}
-
-function CutProductsPage() {
-  return <div className="text-center py-10">Kesilmiş Ürün - Yükleniyor...</div>;
-}
-
-function ShipmentsPage() {
-  return <div className="text-center py-10">Sevkiyat - Yükleniyor...</div>;
-}
-
-function ProductionStockPage() {
-  return <div className="text-center py-10">Üretim Stok - Yükleniyor...</div>;
-}
-
-function RawMaterialsPage() {
-  return <div className="text-center py-10">Hammadde Yönetimi - Yükleniyor...</div>;
-}
-
-function ExtraMaterialsPage() {
-  return <div className="text-center py-10">Ekstra Malzemeler - Yükleniyor...</div>;
-}
-
-function RawMaterialStockPage() {
-  return <div className="text-center py-10">Hammadde Stok - Yükleniyor...</div>;
-}
-
-function DailyConsumptionPage() {
-  return <div className="text-center py-10">Günlük Tüketim - Yükleniyor...</div>;
-}
-
-function GasEntriesPage() {
-  return <div className="text-center py-10">Gaz Girişi - Yükleniyor...</div>;
-}
-
-function CostAnalysisPage() {
-  return <div className="text-center py-10">Maliyet Analizi - Yükleniyor...</div>;
-}
-
-function MonthlyReportPage() {
-  return <div className="text-center py-10">Aylık Rapor - Yükleniyor...</div>;
-}
-
-function ExcelExportPage() {
-  return <div className="text-center py-10">Excel Dışa Aktar - Yükleniyor...</div>;
-}
-
-function ManualCostPage() {
-  return <div className="text-center py-10">Manuel Maliyet - Yükleniyor...</div>;
-}
-
-function ReportingPage() {
-  return <div className="text-center py-10">Raporlama - Yükleniyor...</div>;
-}
-
-function ExchangeRatesPage() {
-  return <div className="text-center py-10">Kurlar - Yükleniyor...</div>;
-}
-
-function UsersPage() {
-  return <div className="text-center py-10">Kullanıcı Yönetimi - Yükleniyor...</div>;
-}
+// Import pages
+import ProductionPage from '@/pages/ProductionPage';
+import CutProductsPage from '@/pages/CutProductsPage';
+import ShipmentsPage from '@/pages/ShipmentsPage';
+import ProductionStockPage from '@/pages/ProductionStockPage';
+import RawMaterialsPage from '@/pages/RawMaterialsPage';
+import ExtraMaterialsPage from '@/pages/ExtraMaterialsPage';
+import RawMaterialStockPage from '@/pages/RawMaterialStockPage';
+import DailyConsumptionPage from '@/pages/DailyConsumptionPage';
+import GasEntriesPage from '@/pages/GasEntriesPage';
+import CostAnalysisPage from '@/pages/CostAnalysisPage';
+import MonthlyReportPage from '@/pages/MonthlyReportPage';
+import ExcelExportPage from '@/pages/ExcelExportPage';
+import ManualCostPage from '@/pages/ManualCostPage';
+import ReportingPage from '@/pages/ReportingPage';
+import ExchangeRatesPage from '@/pages/ExchangeRatesPage';
+import UsersPage from '@/pages/UsersPage';
 
 // ==================== MAIN APP ====================
 function App() {
